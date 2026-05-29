@@ -32,7 +32,9 @@ jobs:
               run: "docker push dhruvamaheshwari47/self_runner_etp:latest"
 
             - name: "stop the old container"
-              run: "docker rm -f self_runner_etp || true"
+              run: | 
+                docker rm -f self_runner_etp
+                continue-on-error: true
 
             - name: "re run the new container"
               run: "docker run -d -p 4000:4000 --name self_runner_etp dhruvamaheshwari47/self_runner_etp:latest"
